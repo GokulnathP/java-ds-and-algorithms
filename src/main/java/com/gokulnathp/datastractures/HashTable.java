@@ -3,7 +3,7 @@ package com.gokulnathp.datastractures;
 import java.util.*;
 
 public class HashTable {
-    class Node {
+    public static class Node {
         String key;
         int value;
         Node next;
@@ -15,7 +15,7 @@ public class HashTable {
     }
 
     private final int size = 7;
-    private Node[] dataMap = new Node[size];
+    private final Node[] dataMap = new Node[size];
 
     public void set(String key, int value) {
         int index = hash(key);

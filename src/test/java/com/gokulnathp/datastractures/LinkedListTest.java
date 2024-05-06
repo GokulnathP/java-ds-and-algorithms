@@ -22,9 +22,8 @@ class LinkedListTest {
         void shouldRemoveFirstNode() {
             LinkedList linkedList = new LinkedList(1);
 
-            Node removedNode = linkedList.removeFirst();
 
-            assertEquals(removedNode.value, 1);
+            assertEquals(linkedList.removeFirst().value, 1);
             assertArrayEquals(linkedList.toArray(), createArray());
         }
 
@@ -33,9 +32,8 @@ class LinkedListTest {
             LinkedList linkedList = new LinkedList(1);
 
             linkedList.removeFirst();
-            Node removedNode = linkedList.removeFirst();
 
-            assertNull(removedNode);
+            assertNull(linkedList.removeFirst());
             assertEquals(linkedList.toArray().length, 0);
         }
     }
@@ -90,9 +88,7 @@ class LinkedListTest {
         void shouldRemoveLastNode() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node removedNode = linkedList.removeLast();
-
-            assertEquals(removedNode.value, 2);
+            assertEquals(linkedList.removeLast().value, 2);
             assertArrayEquals(linkedList.toArray(), createArray());
         }
 
@@ -101,9 +97,8 @@ class LinkedListTest {
             LinkedList linkedList = new LinkedList(2);
 
             linkedList.removeLast();
-            Node removedNode = linkedList.removeLast();
 
-            assertNull(removedNode);
+            assertNull(linkedList.removeLast());
             assertEquals(linkedList.toArray().length, 0);
         }
     }
@@ -115,36 +110,28 @@ class LinkedListTest {
             LinkedList linkedList = new LinkedList(2);
             linkedList.removeFirst();
 
-            Node node = linkedList.get(0);
-
-            assertNull(node);
+            assertNull(linkedList.get(0));
         }
 
         @Test
         void shouldReturnNullWhenIndexIsLessThanZero() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node node = linkedList.get(-1);
-
-            assertNull(node);
+            assertNull(linkedList.get(-1));
         }
 
         @Test
         void shouldReturnNullWhenIndexIsGreaterThanLength() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node node = linkedList.get(2);
-
-            assertNull(node);
+            assertNull(linkedList.get(2));
         }
 
         @Test
         void shouldReturnNullWhenIndexIsEqualToLength() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node node = linkedList.get(1);
-
-            assertNull(node);
+            assertNull(linkedList.get(1));
         }
 
         @Test
@@ -153,9 +140,7 @@ class LinkedListTest {
             linkedList.append(3);
             linkedList.prepend(-2);
 
-            Node node = linkedList.get(0);
-
-            assertEquals(node.value, -2);
+            assertEquals(linkedList.get(0).value, -2);
         }
 
         @Test
@@ -164,9 +149,7 @@ class LinkedListTest {
             linkedList.append(3);
             linkedList.prepend(1);
 
-            Node node = linkedList.get(1);
-
-            assertEquals(node.value, 2);
+            assertEquals(linkedList.get(1).value, 2);
         }
 
         @Test
@@ -175,9 +158,7 @@ class LinkedListTest {
             linkedList.append(3);
             linkedList.prepend(-1);
 
-            Node node = linkedList.get(2);
-
-            assertEquals(node.value, 3);
+            assertEquals(linkedList.get(2).value, 3);
         }
     }
 
@@ -292,27 +273,21 @@ class LinkedListTest {
         void shouldReturnNullWhenIndexIsLessThanZero() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node removedNode = linkedList.remove(-1);
-
-            assertNull(removedNode);
+            assertNull(linkedList.remove(-1));
         }
 
         @Test
         void shouldReturnNullWhenIndexIsEqualToListLength() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node removedNode = linkedList.remove(1);
-
-            assertNull(removedNode);
+            assertNull(linkedList.remove(1));
         }
 
         @Test
         void shouldReturnNullWhenIndexIsGreaterThanLength() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node removedNode = linkedList.remove(3);
-
-            assertNull(removedNode);
+            assertNull(linkedList.remove(3));
         }
 
         @Test
@@ -321,9 +296,7 @@ class LinkedListTest {
             linkedList.append(3);
             linkedList.prepend(1);
 
-            Node removedNode = linkedList.remove(0);
-
-            assertEquals(removedNode.value, 1);
+            assertEquals(linkedList.remove(0).value, 1);
             assertArrayEquals(linkedList.toArray(), createArray(2, 3));
         }
 
@@ -333,9 +306,7 @@ class LinkedListTest {
             linkedList.append(3);
             linkedList.prepend(1);
 
-            Node removedNode = linkedList.remove(1);
-
-            assertEquals(removedNode.value, 2);
+            assertEquals(linkedList.remove(1).value, 2);
             assertArrayEquals(linkedList.toArray(), createArray(1, 3));
         }
 
@@ -345,9 +316,7 @@ class LinkedListTest {
             linkedList.append(3);
             linkedList.prepend(1);
 
-            Node removedNode = linkedList.remove(2);
-
-            assertEquals(removedNode.value, 3);
+            assertEquals(linkedList.remove(2).value, 3);
             assertArrayEquals(linkedList.toArray(), createArray(1, 2));
         }
     }
@@ -394,9 +363,7 @@ class LinkedListTest {
             linkedList.append(3);
             linkedList.prepend(1);
 
-            Node middleNode = linkedList.findMiddleNode();
-
-            assertEquals(middleNode.value, 2);
+            assertEquals(linkedList.findMiddleNode().value, 2);
         }
 
         @Test
@@ -406,18 +373,14 @@ class LinkedListTest {
             linkedList.append(4);
             linkedList.prepend(1);
 
-            Node middleNode = linkedList.findMiddleNode();
-
-            assertEquals(middleNode.value, 3);
+            assertEquals(linkedList.findMiddleNode().value, 3);
         }
 
         @Test
         void shouldReturnFirstNodeForSingleNodeList() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node middleNode = linkedList.findMiddleNode();
-
-            assertEquals(middleNode.value, 2);
+            assertEquals(linkedList.findMiddleNode().value, 2);
         }
 
         @Test
@@ -425,9 +388,7 @@ class LinkedListTest {
             LinkedList linkedList = new LinkedList(2);
             linkedList.append(3);
 
-            Node middleNode = linkedList.findMiddleNode();
-
-            assertEquals(middleNode.value, 3);
+            assertEquals(linkedList.findMiddleNode().value, 3);
         }
 
         @Test
@@ -435,9 +396,7 @@ class LinkedListTest {
             LinkedList linkedList = new LinkedList(2);
             linkedList.removeLast();
 
-            Node middleNode = linkedList.findMiddleNode();
-
-            assertNull(middleNode);
+            assertNull(linkedList.findMiddleNode());
         }
     }
 
@@ -492,18 +451,14 @@ class LinkedListTest {
         void shouldReturnNullWhenKIsLessThanZero() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node kthNodeFromEnd = linkedList.findKthNodeFromEnd(-1);
-
-            assertNull(kthNodeFromEnd);
+            assertNull(linkedList.findKthNodeFromEnd(-1));
         }
 
         @Test
         void shouldReturnNullWhenKIsZero() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node kthNodeFromEnd = linkedList.findKthNodeFromEnd(0);
-
-            assertNull(kthNodeFromEnd);
+            assertNull(linkedList.findKthNodeFromEnd(0));
         }
 
         @Test
@@ -511,9 +466,7 @@ class LinkedListTest {
             LinkedList linkedList = new LinkedList(2);
             linkedList.append(3);
 
-            Node kthNodeFromEnd = linkedList.findKthNodeFromEnd(3);
-
-            assertNull(kthNodeFromEnd);
+            assertNull(linkedList.findKthNodeFromEnd(3));
         }
 
         @Test
@@ -523,9 +476,7 @@ class LinkedListTest {
             linkedList.prepend(1);
             linkedList.append(4);
 
-            Node kthNodeFromEnd = linkedList.findKthNodeFromEnd(4);
-
-            assertEquals(kthNodeFromEnd.value, 1);
+            assertEquals(linkedList.findKthNodeFromEnd(4).value, 1);
         }
 
         @Test
@@ -534,9 +485,7 @@ class LinkedListTest {
             linkedList.append(3);
             linkedList.prepend(1);
 
-            Node kthNodeFromEnd = linkedList.findKthNodeFromEnd(1);
-
-            assertEquals(kthNodeFromEnd.value, 3);
+            assertEquals(linkedList.findKthNodeFromEnd(1).value, 3);
         }
 
         @Test
@@ -546,9 +495,7 @@ class LinkedListTest {
             linkedList.append(4);
             linkedList.append(5);
 
-            Node kthNodeFromEnd = linkedList.findKthNodeFromEnd(3);
-
-            assertEquals(kthNodeFromEnd.value, 3);
+            assertEquals(linkedList.findKthNodeFromEnd(3).value, 3);
         }
     }
 
@@ -558,18 +505,14 @@ class LinkedListTest {
         void shouldReturnNullWhenKIsLessThanZero() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node kthNodeFromEnd = linkedList.findKthFromEnd(-1);
-
-            assertNull(kthNodeFromEnd);
+            assertNull(linkedList.findKthFromEnd(-1));
         }
 
         @Test
         void shouldReturnNullWhenKIsZero() {
             LinkedList linkedList = new LinkedList(2);
 
-            Node kthNodeFromEnd = linkedList.findKthFromEnd(0);
-
-            assertNull(kthNodeFromEnd);
+            assertNull(linkedList.findKthFromEnd(0));
         }
 
         @Test
@@ -577,9 +520,7 @@ class LinkedListTest {
             LinkedList linkedList = new LinkedList(2);
             linkedList.append(3);
 
-            Node kthNodeFromEnd = linkedList.findKthFromEnd(3);
-
-            assertNull(kthNodeFromEnd);
+            assertNull(linkedList.findKthFromEnd(3));
         }
 
         @Test
@@ -589,9 +530,7 @@ class LinkedListTest {
             linkedList.prepend(1);
             linkedList.append(4);
 
-            Node kthNodeFromEnd = linkedList.findKthFromEnd(4);
-
-            assertEquals(kthNodeFromEnd.value, 1);
+            assertEquals(linkedList.findKthFromEnd(4).value, 1);
         }
 
         @Test
@@ -600,9 +539,7 @@ class LinkedListTest {
             linkedList.append(3);
             linkedList.prepend(1);
 
-            Node kthNodeFromEnd = linkedList.findKthFromEnd(1);
-
-            assertEquals(kthNodeFromEnd.value, 3);
+            assertEquals(linkedList.findKthFromEnd(1).value, 3);
         }
 
         @Test
@@ -612,9 +549,7 @@ class LinkedListTest {
             linkedList.append(4);
             linkedList.append(5);
 
-            Node kthNodeFromEnd = linkedList.findKthFromEnd(3);
-
-            assertEquals(kthNodeFromEnd.value, 3);
+            assertEquals(linkedList.findKthFromEnd(3).value, 3);
         }
     }
 

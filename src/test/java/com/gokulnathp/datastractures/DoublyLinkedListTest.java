@@ -52,9 +52,7 @@ class DoublyLinkedListTest {
         void shouldEmptyListWhenThereIsOnlyOneNode() {
             DoublyLinkedList doublyLinkedList = new DoublyLinkedList(2);
 
-            DoublyNode doublyNode = doublyLinkedList.removeLast();
-
-            assertEquals(2, doublyNode.value);
+            assertEquals(2, doublyLinkedList.removeLast().value);
             assertArrayEquals(createArray(), doublyLinkedList.toArray());
         }
 
@@ -63,9 +61,7 @@ class DoublyLinkedListTest {
             DoublyLinkedList doublyLinkedList = new DoublyLinkedList(2);
             doublyLinkedList.append(3);
 
-            DoublyNode doublyNode = doublyLinkedList.removeLast();
-
-            assertEquals(3, doublyNode.value);
+            assertEquals(3, doublyLinkedList.removeLast().value);
             assertArrayEquals(createArray(2), doublyLinkedList.toArray());
         }
     }
@@ -104,9 +100,7 @@ class DoublyLinkedListTest {
         void shouldEmptyListWhenThereIsOnlyOneNode() {
             DoublyLinkedList doublyLinkedList = new DoublyLinkedList(2);
 
-            DoublyNode doublyNode = doublyLinkedList.removeFirst();
-
-            assertEquals(2, doublyNode.value);
+            assertEquals(2, doublyLinkedList.removeFirst().value);
             assertArrayEquals(createArray(), doublyLinkedList.toArray());
         }
 
@@ -116,9 +110,8 @@ class DoublyLinkedListTest {
             doublyLinkedList.prepend(1);
             doublyLinkedList.append(3);
 
-            DoublyNode doublyNode = doublyLinkedList.removeFirst();
 
-            assertEquals(1, doublyNode.value);
+            assertEquals(1, doublyLinkedList.removeFirst().value);
             assertArrayEquals(createArray(2, 3), doublyLinkedList.toArray());
         }
     }

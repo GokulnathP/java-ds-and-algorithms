@@ -1,6 +1,15 @@
 package com.gokulnathp.datastractures;
 
 public class Stack {
+    public static class Node {
+        public int value;
+        public Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+    }
+
     private Node top;
     private int height = 0;
 

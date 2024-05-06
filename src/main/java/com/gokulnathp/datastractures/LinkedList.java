@@ -4,6 +4,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LinkedList {
+    public static class Node {
+        public int value;
+        public Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+    }
+
     private Node head;
     private Node tail;
     private int length = 0;

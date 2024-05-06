@@ -1,20 +1,30 @@
 package com.gokulnathp.datastractures;
 
 public class DoublyLinkedList {
-    private DoublyNode head;
-    private DoublyNode tail;
+    public static class Node {
+        public int value;
+        public Node next;
+        public Node prev;
+
+        public Node(int value) {
+            this.value = value;
+        }
+    }
+
+    private Node head;
+    private Node tail;
     private int length = 0;
 
     public DoublyLinkedList() {
     }
 
     public DoublyLinkedList(int value) {
-        DoublyNode newNode = new DoublyNode(value);
+        Node newNode = new Node(value);
         addNodeToEmptyList(newNode);
     }
 
     public void append(int value) {
-        DoublyNode newNode = new DoublyNode(value);
+        Node newNode = new Node(value);
 
         if (isListEmpty()) {
             addNodeToEmptyList(newNode);
@@ -27,16 +37,16 @@ public class DoublyLinkedList {
         length++;
     }
 
-    public DoublyNode removeLast() {
+    public Node removeLast() {
         if (isListEmpty()) return null;
 
-        DoublyNode nodeToBeRemoved = tail;
+        Node nodeToBeRemoved = tail;
         if (length == 1) {
             emptyList();
             return nodeToBeRemoved;
         }
 
-        DoublyNode newTail = nodeToBeRemoved.prev;
+        Node newTail = nodeToBeRemoved.prev;
         newTail.next = null;
         nodeToBeRemoved.prev = null;
 
@@ -47,7 +57,7 @@ public class DoublyLinkedList {
     }
 
     public void prepend(int value) {
-        DoublyNode newNode = new DoublyNode(value);
+        Node newNode = new Node(value);
 
         if (isListEmpty()) {
             addNodeToEmptyList(newNode);
@@ -60,16 +70,16 @@ public class DoublyLinkedList {
         length++;
     }
 
-    public DoublyNode removeFirst() {
+    public Node removeFirst() {
         if (isListEmpty()) return null;
 
-        DoublyNode nodeToBeRemoved = head;
+        Node nodeToBeRemoved = head;
         if (length == 1) {
             emptyList();
             return nodeToBeRemoved;
         }
 
-        DoublyNode newHead = nodeToBeRemoved.next;
+        Node newHead = nodeToBeRemoved.next;
         nodeToBeRemoved.next = null;
         newHead.prev = null;
 
@@ -78,10 +88,10 @@ public class DoublyLinkedList {
         return nodeToBeRemoved;
     }
 
-    public DoublyNode get(int index) {
+    public Node get(int index) {
         if (index < 0 || index >= length) return null;
 
-        DoublyNode nodeToGet;
+        Node nodeToGet;
         if (index < length / 2) {
             nodeToGet = head;
             for (int i = 0; i < index; i++) nodeToGet = nodeToGet.next;
@@ -93,7 +103,7 @@ public class DoublyLinkedList {
     }
 
     public boolean set(int index, int value) {
-        DoublyNode nodeToUpdate = get(index);
+        Node nodeToUpdate = get(index);
 
         if (nodeToUpdate == null) return false;
 
@@ -114,9 +124,9 @@ public class DoublyLinkedList {
             return true;
         }
 
-        DoublyNode newNode = new DoublyNode(value);
-        DoublyNode prevNode = get(index - 1);
-        DoublyNode nextNode = prevNode.next;
+        Node newNode = new Node(value);
+        Node prevNode = get(index - 1);
+        Node nextNode = prevNode.next;
 
         prevNode.next = newNode;
         newNode.prev = prevNode;
@@ -127,16 +137,16 @@ public class DoublyLinkedList {
         return true;
     }
 
-    public DoublyNode remove(int index) {
+    public Node remove(int index) {
         if (index < 0 || index >= length) return null;
 
         if (index == 0) return removeFirst();
 
         if (index == length - 1) return removeLast();
 
-        DoublyNode nodeToBeRemoved = get(index);
-        DoublyNode prevNode = nodeToBeRemoved.prev;
-        DoublyNode nextNode = nodeToBeRemoved.next;
+        Node nodeToBeRemoved = get(index);
+        Node prevNode = nodeToBeRemoved.prev;
+        Node nextNode = nodeToBeRemoved.next;
 
         prevNode.next = nextNode;
         nextNode.prev = prevNode;
@@ -157,12 +167,12 @@ public class DoublyLinkedList {
     }
 
     public void reverse() {
-        DoublyNode currentNode = head;
+        Node currentNode = head;
         head = tail;
         tail = currentNode;
 
         while(currentNode != null) {
-            DoublyNode nextNode = currentNode.next;
+            Node nextNode = currentNode.next;
             currentNode.next = currentNode.prev;
             currentNode.prev = nextNode;
 
@@ -171,8 +181,8 @@ public class DoublyLinkedList {
     }
 
     public boolean isPalindrome() {
-        DoublyNode nodeFromStart = head;
-        DoublyNode nodeFromEnd = tail;
+        Node nodeFromStart = head;
+        Node nodeFromEnd = tail;
 
         for (int i = 0; i < length / 2; i++) {
             if(nodeFromStart.value != nodeFromEnd.value) return false;
@@ -187,12 +197,12 @@ public class DoublyLinkedList {
     public void swapPairs() {
         if(length <= 1) return;
 
-        DoublyNode currentNode = head;
-        DoublyNode nodeToSwap = currentNode.next;
+        Node currentNode = head;
+        Node nodeToSwap = currentNode.next;
         head = head.next;
 
         while(currentNode != null && currentNode.next != null) {
-            DoublyNode nextPairStartingNode = currentNode.next.next;
+            Node nextPairStartingNode = currentNode.next.next;
             nodeToSwap = currentNode.next;
 
             if(currentNode.prev != null) currentNode.prev.next = nodeToSwap;
@@ -214,7 +224,7 @@ public class DoublyLinkedList {
     public int[] toArray() {
         int[] array = new int[length];
 
-        DoublyNode currentNode = head;
+        Node currentNode = head;
         for (int i = 0; i < length; i++) {
             array[i] = currentNode.value;
             currentNode = currentNode.next;
@@ -233,7 +243,7 @@ public class DoublyLinkedList {
         length = 0;
     }
 
-    private void addNodeToEmptyList(DoublyNode node) {
+    private void addNodeToEmptyList(Node node) {
         head = node;
         tail = node;
         length++;
