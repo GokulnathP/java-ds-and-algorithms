@@ -3,6 +3,8 @@ package com.gokulnathp.datastractures;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BinarySearchTreeTest {
@@ -452,6 +454,354 @@ class BinarySearchTreeTest {
             assertEquals(4, binarySearchTree.getRoot().left.right.value);
             assertEquals(1, binarySearchTree.getRoot().right.value);
             assertEquals(2, binarySearchTree.getRoot().right.left.value);
+        }
+    }
+
+    @Nested
+    class BFS {
+        @Test
+        void testEmptyTree() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+
+            assertEquals(List.of(), binarySearchTree.BFS());
+        }
+
+        @Test
+        void testSingleNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(1);
+
+            assertEquals(List.of(1), binarySearchTree.BFS());
+        }
+
+        @Test
+        void testTwoNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+
+            assertEquals(List.of(2, 1), binarySearchTree.BFS());
+        }
+
+        @Test
+        void testThreeNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(3);
+
+            assertEquals(List.of(2, 1, 3), binarySearchTree.BFS());
+        }
+
+        @Test
+        void testFourNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(4);
+
+            assertEquals(List.of(2, 1, 3, 4), binarySearchTree.BFS());
+        }
+
+        @Test
+        void testFiveNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(5);
+
+            assertEquals(List.of(3, 2, 4, 1, 5), binarySearchTree.BFS());
+        }
+
+        @Test
+        void testSixNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(5);
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(6);
+
+            assertEquals(List.of(3, 2, 5, 1, 4, 6), binarySearchTree.BFS());
+        }
+
+        @Test
+        void testSevenNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(6);
+            binarySearchTree.insert(5);
+            binarySearchTree.insert(7);
+
+            assertEquals(List.of(4, 2, 6, 1, 3, 5, 7), binarySearchTree.BFS());
+        }
+    }
+
+    @Nested
+    class DFSPreOrder {
+        @Test
+        void testEmptyTree() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+
+            assertEquals(List.of(), binarySearchTree.DFSPreOrder());
+        }
+
+        @Test
+        void testSingleNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(1);
+
+            assertEquals(List.of(1), binarySearchTree.DFSPreOrder());
+        }
+
+        @Test
+        void testTwoNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+
+            assertEquals(List.of(2, 1), binarySearchTree.DFSPreOrder());
+        }
+
+        @Test
+        void testThreeNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(3);
+
+            assertEquals(List.of(2, 1, 3), binarySearchTree.DFSPreOrder());
+        }
+
+        @Test
+        void testFourNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(4);
+
+            assertEquals(List.of(2, 1, 3, 4), binarySearchTree.DFSPreOrder());
+        }
+
+        @Test
+        void testFiveNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(5);
+
+            assertEquals(List.of(3, 2, 1, 4, 5), binarySearchTree.DFSPreOrder());
+        }
+
+        @Test
+        void testSixNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(5);
+            binarySearchTree.insert(6);
+            binarySearchTree.insert(4);
+
+            assertEquals(List.of(3, 2, 1, 5, 4, 6), binarySearchTree.DFSPreOrder());
+        }
+
+        @Test
+        void testSevenNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(6);
+            binarySearchTree.insert(7);
+            binarySearchTree.insert(5);
+
+            assertEquals(List.of(4, 2, 1, 3, 6, 5, 7), binarySearchTree.DFSPreOrder());
+        }
+    }
+
+    @Nested
+    class DFSPostOrder {
+        @Test
+        void testEmptyTree() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+
+            assertEquals(List.of(), binarySearchTree.DFSPostOrder());
+        }
+
+        @Test
+        void testSingleNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(1);
+
+            assertEquals(List.of(1), binarySearchTree.DFSPostOrder());
+        }
+
+        @Test
+        void testTwoNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+
+            assertEquals(List.of(1, 2), binarySearchTree.DFSPostOrder());
+        }
+
+        @Test
+        void testThreeNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(3);
+
+            assertEquals(List.of(1, 3, 2), binarySearchTree.DFSPostOrder());
+        }
+
+        @Test
+        void testFourNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(4);
+
+            assertEquals(List.of(1, 4, 3, 2), binarySearchTree.DFSPostOrder());
+        }
+
+        @Test
+        void testFiveNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(5);
+
+            assertEquals(List.of(1, 2, 5, 4, 3), binarySearchTree.DFSPostOrder());
+        }
+
+        @Test
+        void testSixNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(5);
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(6);
+
+            assertEquals(List.of(1, 2, 4, 6, 5, 3), binarySearchTree.DFSPostOrder());
+        }
+
+        @Test
+        void testSevenNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(6);
+            binarySearchTree.insert(5);
+            binarySearchTree.insert(7);
+
+            assertEquals(List.of(1, 3, 2, 5, 7, 6, 4), binarySearchTree.DFSPostOrder());
+        }
+    }
+
+    @Nested
+    class DFSInOrder {
+        @Test
+        void testEmptyTree() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+
+            assertEquals(List.of(), binarySearchTree.DFSInOrder());
+        }
+
+        @Test
+        void testSingleNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(1);
+
+            assertEquals(List.of(1), binarySearchTree.DFSInOrder());
+        }
+
+        @Test
+        void testTwoNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+
+            assertEquals(List.of(1, 2), binarySearchTree.DFSInOrder());
+        }
+
+        @Test
+        void testThreeNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(3);
+
+            assertEquals(List.of(1, 2, 3), binarySearchTree.DFSInOrder());
+        }
+
+        @Test
+        void testFourNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(3);
+
+            assertEquals(List.of(1, 2, 3, 4), binarySearchTree.DFSInOrder());
+        }
+
+        @Test
+        void testFiveNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(5);
+
+            assertEquals(List.of(1, 2, 3, 4, 5), binarySearchTree.DFSInOrder());
+        }
+
+        @Test
+        void testSixNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(5);
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(6);
+
+            assertEquals(List.of(1, 2, 3, 4, 5, 6), binarySearchTree.DFSInOrder());
+        }
+
+        @Test
+        void testSevenNode() {
+            BinarySearchTree binarySearchTree = new BinarySearchTree();
+            binarySearchTree.insert(4);
+            binarySearchTree.insert(2);
+            binarySearchTree.insert(3);
+            binarySearchTree.insert(1);
+            binarySearchTree.insert(6);
+            binarySearchTree.insert(5);
+            binarySearchTree.insert(7);
+
+            assertEquals(List.of(1, 2, 3, 4, 5, 6, 7), binarySearchTree.DFSInOrder());
         }
     }
 }

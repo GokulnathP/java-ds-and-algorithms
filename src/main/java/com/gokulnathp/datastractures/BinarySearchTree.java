@@ -1,5 +1,10 @@
 package com.gokulnathp.datastractures;
 
+import java.util.ArrayList;
+import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
+
 public class BinarySearchTree {
     public static class Node {
         int value;
@@ -138,5 +143,153 @@ public class BinarySearchTree {
 
     public Node getRoot() {
         return root;
+    }
+
+    /** Bread First Search */
+    public ArrayList<Integer> BFS() {
+        ArrayList<Integer> results = new ArrayList<>();
+        if(root == null) return results;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while(!queue.isEmpty()) {
+            Node currentNode = queue.remove();
+            results.add(currentNode.value);
+
+            if(currentNode.left != null) queue.add(currentNode.left);
+            if(currentNode.right != null) queue.add(currentNode.right);
+        }
+
+        return results;
+    }
+
+    /** Depth First Search Pre order */
+    public ArrayList<Integer> DFSPreOrder() {
+        ArrayList<Integer> results = new ArrayList<>();
+        if(root == null) return results;
+
+        class Traverse {
+            Traverse(Node currentNode) {
+                results.add(currentNode.value);
+                if(currentNode.left != null) new Traverse(currentNode.left);
+                if(currentNode.right != null) new Traverse(currentNode.right);
+            }
+        }
+
+        new Traverse(root);
+        return results;
+    }
+
+    /** Depth First Search Post order */
+    public ArrayList<Integer> DFSPostOrder() {
+        ArrayList<Integer> results = new ArrayList<>();
+        if(root == null) return results;
+
+        class Traverse {
+            Traverse(Node currentNode) {
+                if(currentNode.left != null) new Traverse(currentNode.left);
+                if(currentNode.right != null) new Traverse(currentNode.right);
+                results.add(currentNode.value);
+            }
+        }
+
+        new Traverse(root);
+        return results;
+    }
+
+    /** Depth First Search In order */
+    public ArrayList<Integer> DFSInOrder() {
+        ArrayList<Integer> results = new ArrayList<>();
+        if(root == null) return results;
+
+        class Traverse {
+            Traverse(Node currentNode) {
+                if(currentNode.left != null) new Traverse(currentNode.left);
+                results.add(currentNode.value);
+                if(currentNode.right != null) new Traverse(currentNode.right);
+            }
+        }
+
+        new Traverse(root);
+        return results;
+    }
+
+    public Integer kthSmallest(int k) {
+        if(k < 1 || root == null) return null;
+        Stack<Node> stack = new Stack<>();
+        Node currentNode = root;
+
+        while(!stack.isEmpty() || currentNode != null) {
+            while(currentNode != null) {
+                stack.push(currentNode);
+                currentNode = currentNode.left;
+            }
+
+            currentNode = stack.pop();
+            k -= 1;
+            if(k == 0) return currentNode.value;
+
+            currentNode = currentNode.right;
+        }
+
+        return null;
+    }
+
+    public Integer kthSmallestV1(int k) {
+        if(k < 1 || root == null) return null;
+        Stack<Integer> results = new Stack<>();
+
+        class Traverse {
+            Traverse(Node currentNode) {
+                if(currentNode.left != null) new Traverse(currentNode.left);
+                if(results.size() >= k) return;
+                results.add(currentNode.value);
+                if(currentNode.right != null) new Traverse(currentNode.right);
+            }
+        }
+
+        new Traverse(root);
+        return results.pop();
+    }
+
+    public boolean isValidBST() {
+        ArrayList<Integer> array = DFSInOrder();
+
+        for(int i = 1; i < array.size(); i++) {
+            if(array.get(i) <= array.get(i - 1)) return false;
+        }
+
+        return true;
+    }
+
+    public boolean isValidBSTV1() {
+        final boolean[] isValid = {true};
+
+        class Traverse {
+            Traverse(Node currentNode) {
+                if(!isValid[0]) return;
+
+                if(currentNode.left == null && currentNode.right == null) return;
+
+                if(currentNode.left != null) {
+                    if(currentNode.left.value > currentNode.value) {
+                        isValid[0] = false;
+                        return;
+                    }
+                    new Traverse(currentNode.left);
+                }
+
+                if(currentNode.right != null) {
+                    if(currentNode.right.value < currentNode.value) {
+                        isValid[0] = false;
+                        return;
+                    }
+                    new Traverse(currentNode.right);
+                }
+            }
+        }
+        new Traverse(root);
+        return isValid[0];
     }
 }
