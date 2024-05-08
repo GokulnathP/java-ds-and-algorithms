@@ -22,7 +22,8 @@ public class LinkedList {
         addNodeToEmptyList(newNode);
     }
 
-    public LinkedList() {}
+    public LinkedList() {
+    }
 
     public Node removeFirst() {
         if (isListEmpty()) return null;
@@ -500,14 +501,14 @@ public class LinkedList {
     }
 
     public void reverseBetween(int startIndex, int endIndex) {
-        if(length <= 1) return;
-        if(startIndex < 0 || endIndex >= length) return;
-        if(endIndex - startIndex <= 0) return;
+        if (length <= 1) return;
+        if (startIndex < 0 || endIndex >= length) return;
+        if (endIndex - startIndex <= 0) return;
 
         Node lastNodeBeforeReverse = null;
         Node currentNode = head;
 
-        for(int i = 0; i < startIndex; i++) {
+        for (int i = 0; i < startIndex; i++) {
             lastNodeBeforeReverse = currentNode;
             currentNode = currentNode.next;
         }
@@ -516,7 +517,7 @@ public class LinkedList {
         Node previousNode = currentNode;
         currentNode = currentNode.next;
 
-        for(int i = 0; i < endIndex - startIndex; i++) {
+        for (int i = 0; i < endIndex - startIndex; i++) {
             Node nextNode = currentNode.next;
             currentNode.next = previousNode;
 
@@ -524,7 +525,7 @@ public class LinkedList {
             currentNode = nextNode;
         }
 
-        if(lastNodeBeforeReverse == null) head = previousNode;
+        if (lastNodeBeforeReverse == null) head = previousNode;
         else lastNodeBeforeReverse.next = previousNode;
         firstNodeOfReverse.next = currentNode;
     }
@@ -555,5 +556,183 @@ public class LinkedList {
         head = null;
         tail = null;
         length = 0;
+    }
+
+    public void insertionSort() {
+        if (length < 2) return;
+
+        Node sortedList = head;
+        Node unsortedList = head.next;
+        sortedList.next = null;
+
+        while (unsortedList != null) { // 4, 1, 3, 5 -> 1, 4, 3 ->
+            Node temp = unsortedList.next;
+            if (unsortedList.value < sortedList.value) {
+                unsortedList.next = sortedList;
+                sortedList = unsortedList;
+            } else {
+                Node searchPointer = sortedList;
+                while (searchPointer.next != null & unsortedList.value > searchPointer.next.value) {
+                    searchPointer = searchPointer.next;
+                }
+
+                unsortedList.next = searchPointer.next;
+                searchPointer.next = unsortedList;
+            }
+
+            unsortedList = temp;
+        }
+
+        head = sortedList;
+        tail = head;
+        while (tail.next != null) tail = tail.next;
+    }
+
+    public void insertionSortV1() {
+        if (length < 2) return;
+
+        Node sortedList = head;
+        Node unsortedList = head.next;
+        sortedList.next = null;
+
+        while (unsortedList != null) {
+            Node temp = unsortedList.next;
+            if (unsortedList.value < sortedList.value) {
+                unsortedList.next = sortedList;
+                sortedList = unsortedList;
+            } else {
+                Node prevPointer = sortedList;
+                Node searchPointer = sortedList;
+                while (searchPointer != null && unsortedList.value > searchPointer.value) {
+                    prevPointer = searchPointer;
+                    searchPointer = searchPointer.next;
+                }
+                unsortedList.next = searchPointer;
+                prevPointer.next = unsortedList;
+            }
+
+            unsortedList = temp;
+        }
+
+        head = sortedList;
+        tail = head;
+        while (tail.next != null) tail = tail.next;
+    }
+
+    public void selectionSort() {
+        if (length < 2) return;
+
+        Node currentNode = head;
+        while (currentNode.next != null) {
+            Node minValueNode = currentNode;
+
+            Node nextNode = currentNode.next;
+            while (nextNode != null) {
+                if (minValueNode.value > nextNode.value) minValueNode = nextNode;
+                nextNode = nextNode.next;
+            }
+
+            if (currentNode != minValueNode) {
+                int temp = currentNode.value;
+                currentNode.value = minValueNode.value;
+                minValueNode.value = temp;
+            }
+
+            currentNode = currentNode.next;
+        }
+    }
+
+    public void bubbleSort() {
+        if (length < 2) return;
+        Node sortedUntil = null;
+
+        while (sortedUntil != head.next) {
+            Node currentNode = head;
+            while (currentNode.next != sortedUntil) {
+                if (currentNode.value > currentNode.next.value) {
+                    int temp = currentNode.value;
+                    currentNode.value = currentNode.next.value;
+                    currentNode.next.value = temp;
+                }
+                currentNode = currentNode.next;
+            }
+            sortedUntil = currentNode;
+        }
+    }
+
+    public void bubbleSortV1() {
+        Node currentNode = head;
+
+        while (currentNode != null) {
+            Node nextNode = currentNode.next;
+            while (nextNode != null) {
+                if (currentNode.value > nextNode.value) {
+                    int temp = currentNode.value;
+                    currentNode.value = nextNode.value;
+                    nextNode.value = temp;
+                }
+                nextNode = nextNode.next;
+            }
+            currentNode = currentNode.next;
+
+        }
+    }
+
+    public void merge(LinkedList otherList) {
+        Node dummy = new Node(0);
+        Node combinedList = dummy;
+
+        Node otherHead = otherList.head;
+
+        while(head != null && otherHead != null) {
+            if(head.value < otherHead.value) {
+                combinedList.next = head;
+                head = head.next;
+            } else {
+                combinedList.next = otherHead;
+                otherHead = otherHead.next;
+            }
+            combinedList = combinedList.next;
+        }
+
+        if(head != null) {
+            combinedList.next = head;
+        } else {
+            combinedList.next = otherHead;
+            tail = otherList.tail;
+        }
+
+        head = dummy.next;
+        length += otherList.length;
+    }
+
+    public void mergeV1(LinkedList otherList) {
+        Node list1Pointer = head;
+        Node list2Pointer = otherList.head;
+
+        while (list1Pointer != null && list2Pointer != null) {
+            if (list1Pointer.value < list2Pointer.value) {
+                while (list1Pointer.next != null && list1Pointer.next.value < list2Pointer.value) {
+                    list1Pointer = list1Pointer.next;
+                }
+                Node nextNode = list2Pointer.next;
+                list2Pointer.next = list1Pointer.next;
+                list1Pointer.next = list2Pointer;
+
+                list1Pointer = list2Pointer;
+                list2Pointer = nextNode;
+            } else {
+                head = otherList.head;
+                while (list2Pointer.next != null && list2Pointer.next.value < list1Pointer.value) {
+                    list2Pointer = list2Pointer.next;
+                }
+                Node nextNode = list2Pointer.next;
+                list2Pointer.next = list1Pointer;
+
+                list2Pointer = nextNode;
+            }
+        }
+
+        length += otherList.length;
     }
 }
